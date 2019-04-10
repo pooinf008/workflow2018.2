@@ -23,17 +23,24 @@ public class AppProjeto implements AppProjetoIF{
    
     public void addAtividade(String id, String descricao, int duracao) throws Exception{
     	Atividade atividade = new Elementar(id, descricao, duracao);
-    	this.atividadeDAO.salvar(atividade);
+    	this.atividadeDAO.save(atividade);
     };  
     
     
     public Collection<String> listarAtividades() throws Exception{
     	Collection<String> nomeAtividades = new ArrayList<String>();
-    	Collection<Atividade> atividades = this.atividadeDAO.buscarTodos();
+    	Collection<Atividade> atividades = this.atividadeDAO.findAll();
     	for(Atividade atividade : atividades)
     		nomeAtividades.add(atividade.getDescricao());
     	return nomeAtividades;
     }
+
+
+	@Override
+	public int buscarDuracaoAtividade(String id) throws Exception {
+		Atividade atividade = this.atividadeDAO.findById(id);
+		return atividade.getDuracao();
+	}
     
 /*    public int getDuracao(String id){
         return this.findById(id).getDuracao();

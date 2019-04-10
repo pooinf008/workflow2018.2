@@ -19,6 +19,7 @@ public class AtividadeSQLDAO implements AtividadeDAOIF{
 	private static final String DB_PWD = "";
 	private static final String SAVE = "INSERT INTO ELEMENTAR(id, descricao, duracao) VALUES(?, ?, ?)";
 	private static final String FIND_ALL = "SELECT id, descricao, duracao FROM ELEMENTAR";	
+	private static final String FIND_BY_ID = "SELECT descricao, duracao FROM ELEMENTAR WHERE id = ?";	
 	
 	
 	
@@ -33,7 +34,7 @@ public class AtividadeSQLDAO implements AtividadeDAOIF{
 	
 	
 	@Override
-	public void salvar(Atividade atividade) throws Exception {
+	public void save(Atividade atividade) throws Exception {
 		PreparedStatement stmt = this.getConnection().prepareStatement(AtividadeSQLDAO.SAVE);
 		stmt.setString(1, atividade.getId());
 		stmt.setString(2, atividade.getDescricao());
@@ -43,7 +44,7 @@ public class AtividadeSQLDAO implements AtividadeDAOIF{
 	}
 
 	@Override
-	public Collection<Atividade> buscarTodos() throws Exception {
+	public Collection<Atividade> findAll() throws Exception {
 		Collection<Atividade> atividades = new ArrayList<Atividade>();
 		PreparedStatement stmt = this
 							    .getConnection()
@@ -58,6 +59,23 @@ public class AtividadeSQLDAO implements AtividadeDAOIF{
 		rSet.close();
 		stmt.close();
 		return atividades;
+	}
+
+	@Override
+	public Atividade findById(String id) throws Exception {
+		Atividade atividade = null;
+		PreparedStatement stmt = this
+			    .getConnection()
+				.prepareStatement(AtividadeSQLDAO.FIND_BY_ID);
+		stmt.setString(1, id);
+		ResultSet rSet = stmt.executeQuery();
+		if(rSet.next())
+			atividade = new Elementar(id,
+					rSet.getString("descricao"), 
+					rSet.getInt("duracao"));
+		if(atividade == null)
+			throw new Exception("Atividade Inexistente");
+		return atividade;
 	}
 
 }

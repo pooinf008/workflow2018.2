@@ -27,10 +27,22 @@ public class ConsoleProjeto {
 			switch(option) {
 				case 1 : this.addAtividade(); break;
 				case 2 : this.printAtividades(); break;
+				case 3 : this.buscarDuracaoAtividade(); break;
 			}
 		}while (option > 0);
 	}
 	
+	private void buscarDuracaoAtividade() throws Exception {
+		String id;
+		int duracao;
+		System.out.println("*******************");
+		System.out.println("Informe Id da Atividade");
+		id = this.br.readLine();
+		duracao = this.app.buscarDuracaoAtividade(id);
+		System.out.println("Duração da Atividade: " + duracao);
+		
+	}
+
 	private void printAtividades() throws Exception {
 		System.out.println("*******************");
 		for(String s : this.app.listarAtividades())
@@ -55,6 +67,7 @@ public class ConsoleProjeto {
 		System.out.println("*******************");
 		System.out.println("1 - ADICIONAR ATIVIDADE");
 		System.out.println("2 - LISTAR ATIVIDADES");
+		System.out.println("3 - BUSCAR DURACAO DE ATIVIDADE");
 		System.out.println("0 - SAIR");
 	}
 	

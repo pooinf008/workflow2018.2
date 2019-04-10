@@ -52,14 +52,20 @@ public class AtividadeMemoryDAO implements AtividadeDAOIF {
 	}	
 	
 	@Override
-	public void salvar(Atividade atividade) throws Exception {
+	public void save(Atividade atividade) throws Exception {
 		this.atividades.put(atividade.getId(), atividade);
 		this.writeFile();
 	}
 
 	@Override
-	public Collection<Atividade> buscarTodos() throws Exception {
+	public Collection<Atividade> findAll() throws Exception {
 		return this.atividades.values();
+	}
+
+
+	@Override
+	public Atividade findById(String id) throws Exception {
+		return this.atividades.get(id);
 	}
 
 }

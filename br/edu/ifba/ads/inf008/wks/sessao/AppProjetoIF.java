@@ -4,5 +4,6 @@ import java.util.Collection;
 
 public interface AppProjetoIF {
     public void addAtividade(String id, String descricao, int duracao) throws Exception;
-    public Collection<String> listarAtividades() throws Exception;    
+    public Collection<String> listarAtividades() throws Exception;
+	public int buscarDuracaoAtividade(String id) throws Exception;    
 }
