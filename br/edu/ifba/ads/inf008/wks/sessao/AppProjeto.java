@@ -16,8 +16,10 @@ public class AppProjeto implements AppProjetoIF{
 	private AtividadeDAOIF atividadeDAO;
 	
 	public AppProjeto() throws ClassNotFoundException, IOException, SQLException {
-//		this.atividadeDAO = new AtividadeMemoryDAO();
-		this.atividadeDAO = new AtividadeSQLDAO();
+	}
+	
+	public void setAtividadeDAOIF(AtividadeDAOIF atividadeDAO){
+		this.atividadeDAO = atividadeDAO;
 	}
     
    

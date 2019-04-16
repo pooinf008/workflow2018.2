@@ -22,7 +22,7 @@ import br.edu.ifba.ads.inf008.wks.sessao.AppProjeto;
 import br.edu.ifba.ads.inf008.wks.sessao.AppProjetoIF;
 
 
-public class JWorkFlowFrame extends JFrame implements ActionListener{
+public class JWorkFlowFrame extends JFrame implements ActionListener, WorkFlowUIIF{
 	
 	public JButton btnOk;
 	private JLabel lblId;
@@ -36,9 +36,11 @@ public class JWorkFlowFrame extends JFrame implements ActionListener{
 	
 	public JWorkFlowFrame() throws HeadlessException, ClassNotFoundException, IOException, SQLException {
 		super();
-		this.app = new AppProjeto();
-		this.asm();
 	}
+	
+	public void setLogica(AppProjetoIF appProjeto){
+		this.app = appProjeto;
+	};		
 
 	public void asm() {
 		JPanel center = new JPanel();
@@ -59,7 +61,6 @@ public class JWorkFlowFrame extends JFrame implements ActionListener{
 		this.btnOk.addActionListener(this);
 		this.getContentPane().add(btnOk, BorderLayout.SOUTH);
 		this.getContentPane().add(center, BorderLayout.CENTER);
-		this.setVisible(true);
 	}
 	
 	private void showInfo() throws NumberFormatException, Exception {
@@ -83,5 +84,13 @@ public class JWorkFlowFrame extends JFrame implements ActionListener{
 			e1.printStackTrace();
 		}
 	}
+
+	@Override
+	public void exibir() throws Exception {
+		this.asm();
+		this.setVisible(true);
+	}
+	
+	
 
 }

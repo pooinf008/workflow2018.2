@@ -8,18 +8,21 @@ import java.sql.SQLException;
 import br.edu.ifba.ads.inf008.wks.sessao.AppProjeto;
 import br.edu.ifba.ads.inf008.wks.sessao.AppProjetoIF;
 
-public class ConsoleProjeto {
+public class ConsoleProjeto implements WorkFlowUIIF{
 	
 	private AppProjetoIF app;
 	private BufferedReader br;
 	
 	public ConsoleProjeto() throws ClassNotFoundException, IOException, SQLException {
-		this.app = new AppProjeto();
 		this.br = new  BufferedReader(new
 				InputStreamReader(System.in));
 	}
 	
-	public void show() throws Exception {
+	public void setLogica(AppProjetoIF appProjeto){
+		this.app = appProjeto;
+	};	
+	
+	public void exibir() throws Exception {
 		int option;
 		do {
 			this.menu();
@@ -72,7 +75,7 @@ public class ConsoleProjeto {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		(new ConsoleProjeto()).show();
+		(new ConsoleProjeto()).exibir();
 	}
 
 }
